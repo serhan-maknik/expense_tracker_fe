@@ -4,12 +4,9 @@ import { Form, Input, InputNumber, Button, message, Space } from "antd";
 
 import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import showError from "../utils/showError";
 
 const SignUp = () => {
-  const showError = (errorMessage: string) => {
-    message.error(errorMessage);
-  };
-
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -32,7 +29,7 @@ const SignUp = () => {
     console.log("SERHAN: ", values);
     try {
       await api.post("users/register", values);
-      navigate("/login");
+      navigate("/login", { state: { newSignUp: true } });
     } catch (error: any) {
       console.log("hata aldik");
       showError(error.response.data.errorMessage);

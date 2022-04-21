@@ -25,3 +25,8 @@ interface LOGIN_ERROR{
 }
   
 export type UserAction = LOGIN_START | LOGIN_SUCCESS | LOGIN_ERROR;
+
+
+export interface CustomizedState {
+    newSignUp: boolean;
+  }
