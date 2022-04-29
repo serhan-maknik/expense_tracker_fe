@@ -128,7 +128,7 @@ function Categories() {
           </Button>
         </div>
 
-        {/* <Modal
+        <Modal
           title={
             mode === "new"
               ? "Create New Category"
@@ -170,7 +170,7 @@ function Categories() {
           ) : mode === "delete" ? (
             <>Are you sure?</>
           ) : null}
-        </Modal> */}
+        </Modal>
       </div>
       <Table
         loading={loading}
