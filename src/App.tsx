@@ -41,7 +41,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route index element={<Landing />} />
+          <Route index element={<Login />} />
           <Route path="register" element={<SignUp />} />
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
