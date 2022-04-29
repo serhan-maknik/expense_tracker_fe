@@ -1,28 +1,40 @@
-import React from "react";
-import { Form, Input, Button, Checkbox, Result } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input, Button, Checkbox, Result, message } from "antd";
 
 import showError from "../utils/showError";
 import api from "../utils/api";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CustomizedState } from "../types/users";
+import { LoginForm } from "../types/users";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/actions/userActions";
+import { AppState } from "../store";
+import { success } from "../utils/showSuccess";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("LOCATİON:", location);
 
-  const state = location.state as CustomizedState;
+  const { data, loading, error } = useSelector((state: AppState) => state.user);
+  const state = location.state as any;
 
-  const onFinish = (values: any) => {
-    api
-      .post("users/login", values)
-      .then((response) => {
-        console.log("Success:", values);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("Failed:", error);
-      });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    error && showError(error);
+  }, [error]);
+
+  useEffect(() => {
+    data.username && success("Giris basarılı");
+  }, [data.username]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/categories");
+    }
+  }, [loading]);
+
+  const onFinish = (values: LoginForm) => {
+    dispatch(login(values) as any);
   };
 
   const onFinishFailed = (errorInfo: any) => {

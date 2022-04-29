@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import rootReducer from "./store";
+import Sleeper from "./Sleeper";
 
 const container = document.getElementById("root")!;
 const root = ReactDOM.createRoot(container);

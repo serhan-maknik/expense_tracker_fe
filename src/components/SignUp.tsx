@@ -28,7 +28,7 @@ const SignUp = () => {
   const onFinish = async (values: any) => {
     console.log("SERHAN: ", values);
     try {
-      await api.post("users/register", values);
+      await api().post("users/register", values);
       navigate("/login", { state: { newSignUp: true } });
     } catch (error: any) {
       console.log("hata aldik");
@@ -43,6 +43,7 @@ const SignUp = () => {
       onFinish={onFinish}
       validateMessages={validateMessages}
     >
+      <h2 style={{ textAlign: "center" }}>Kayıt Ol Adamı Hasta Etme</h2>
       <Form.Item name="username" label="User Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
